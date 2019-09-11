@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from os.path import dirname, abspath
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +123,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+### 20190911 data-import-export
+# Fetch Django's project directory
+DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+# Fetch the project_root
+PROJECT_ROOT = dirname(DJANGO_ROOT)
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static') # /path/to/project_directory/static
+###
+
+# import-export
+IMPORT_EXPORT_USE_TRANSACTIONS=True
+IMPORT_EXPORT_SKIP_ADMIN_LOG=False
+
