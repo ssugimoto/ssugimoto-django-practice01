@@ -1,14 +1,26 @@
 from django.contrib import admin
 
 # Register your models here.
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
-from .models import Choice, Question
+from .models import Choice, Question, Book
 
 '''
 class ChoiceInline(admin.StackedInline):
     model = Choice
     extra = 3
 '''
+
+
+class BookResource(resources.ModelResource):
+
+    class Meta:
+        model = Book
+
+
+class BookAdmin(ImportExportModelAdmin):
+    resource_class = BookResource
 
 
 class ChoiceInline(admin.TabularInline):
@@ -30,3 +42,5 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
+admin.site.register(Book, BookAdmin)
+
